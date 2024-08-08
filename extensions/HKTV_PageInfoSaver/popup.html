@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Page Title Saver</title>
+    <style>
+      body {
+        width: 300px;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+      }
+      br {
+        display: block;
+        content: "";
+        margin-top: 20px;
+      }
+      #title-display {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      #save-display {
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="save-button">Save Current Product Info</button>
+    <br />
+    <button id="download-button">Download Current Product Image</button>
+    <br />
+    <div id="save-display"></div>
+    <br />
+    <div id="download-display"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>
