@@ -1,15 +1,7 @@
-chrome.action.onClicked.addListener(function(tab) {
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-      var pageTitle = tabs[0].title;
-      savePageTitleToFile(pageTitle);
-    });
+// background.js 无DOM访问：服务工作线程没有DOM访问权限，它是在后台运行的。
+chrome.action.onClicked.addListener((tab) => {
+  chrome.scripting.executeScript({
+    target: {tabId: tab.id},
+    files: ['content.js']
   });
-  
-  function savePageTitleToFile(title) {
-    chrome.downloads.download({
-      filename: 'qqq.txt',
-      saveAs: true,
-      conflictAction: 'overwrite',
-      url: 'data:text/plain;charset=utf-8,' + encodeURIComponent(title)
-    });
-  }
+});
