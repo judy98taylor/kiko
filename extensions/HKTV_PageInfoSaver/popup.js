@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       resetProcessingState();
       return;
     }
-    const url = tabs[0].url;
+    const url = tabs[0].url.split('?')[0];
     const lang = isEnglishPage(url) ? "en" : "zh";
 
     saveButton.addEventListener("click", function () {
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (injectionResults && injectionResults[0]) {
             let obj_injectionResults = injectionResults[0].result;
-            let obj_extractInfoFromUrl = extractInfoFromUrl(tabs[0].url);
+            let obj_extractInfoFromUrl = extractInfoFromUrl(url);
 
             let infoObject = {
               productName: obj_injectionResults.productName,
@@ -47,15 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
               shortDesc: obj_injectionResults.shortDesc,
               origin: obj_injectionResults.origin,
               categoryPath: obj_extractInfoFromUrl.categoryPath,
-              // url: decodeURIComponent(tabs[0].url),
-              // imgsUrls: obj_injectionResults.imgsUrls,
             };
 
             let content = generateContent(infoObject);
             saveDisplay.textContent = content;
 
             // 显示图片和下载按钮
-            // displayImagesWithDownloadButtons(obj_injectionResults.imgsUrls.split('\n'));
             displayImagesWithDownloadButtons(obj_injectionResults.imgsUrls);
 
             // 保存信息到本地文件
@@ -186,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 使用 \n 来创建换行
     let formattedContent = content.replace(/\n/g, "\r\n");
     // const dateString = getCurrentDateString();
-
+    alert(`${lang}_${productCode}.txt`)
     chrome.downloads.download({
       filename: `${lang}_${productCode}.txt`,
       saveAs: true,
