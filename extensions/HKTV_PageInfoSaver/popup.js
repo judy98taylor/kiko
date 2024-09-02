@@ -49,7 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
               let infoObject = {
                 categoryPath: obj_extractInfoFromUrl.categoryPath,
                 productBrand: obj_injectionResults.productBrand,
-                productName: obj_injectionResults.productName,
+                productName:
+                  lang === "en"
+                    ? obj_injectionResults.productName.replace('(parallel import)','').replace('（parallel import）','') + "(parallel import)"
+                    : obj_injectionResults.productName.replace('(平行進口)','').replace('（平行進口）','') + "(平行進口)",
                 shortDesc: obj_injectionResults.shortDesc,
                 origin: obj_injectionResults.origin,
               };
